@@ -36,7 +36,7 @@ if userge.has_bot:
         f_username = message.from_user.username
         u_n = master.username
         hello = f"""
-Hello [{f_name}](tg://user?id={user_id}), Nice To Meet You! I'm **{bot.first_name}** An Powerfull Assistant Bot.
+Hello [{f_name}](tg://user?id={}), Nice To Meet You! I'm **{bot.first_name}** An Powerfull Assistant Bot.
 
         ©️ <i><b>Powered by</i> [Damien-X](https://t.me/DamienSoukara)</b>
 
