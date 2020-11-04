@@ -36,18 +36,17 @@ if userge.has_bot:
         f_username = message.from_user.username
         u_n = master.username
         hello = f"""
-Hello {f_name},
-Nice To Meet You! I'm **{bot.first_name}** A Bot.
+Hello [{f_name}](tg://user?id={user_id}), Nice To Meet You! I'm **{bot.first_name}** An Powerfull Assistant Bot.
 
-        <i><b>Powered by</i> [Damien-X](https://t.me/DamienSoukara)</b>
+        ©️ <i><b>Powered by</i> [Damien-X](https://t.me/DamienSoukara)</b>
 
-<b>My Master is: {master.first_name}</b>
-<i>You can contact my <b>Master</b> and checkout the <b>Repo</b> For more info.</i>
+<b>My Owner is: {master.first_name}</b>
+You Can Talk/Contact My Owner Using This Bot. 
 """
         if Config.BOT_FORWARDS:          
-            hello += "\n<b>NOTE: </b> "
-            hello += "**Bot Forwarding is** :  ✅ `Enabled`\n"
-            hello += "All your messages here will be forwared to my **MASTER**"
+            hello += "\n<b>ℹ NOTE : </b> "
+            hello += "**Bot Forwarding Is** :  ✅ `Enabled`\n"
+            hello += "All Ur Messages Here Will Be Forwared To My **Owner**"
         if u_id != Config.OWNER_ID:
             found = await BOT_START.find_one({'user_id': u_id})
             if not found:
@@ -120,9 +119,9 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
                 file_ref=LOGO_REF,
                 caption=caption_text,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("🗣 CONTACT", url=f"t.me/{u_n}"),
-                    InlineKeyboardButton("🗒 REPO", url="https://github.com/AmineSoukara/Damien-X")],
-                    [InlineKeyboardButton("©️ Login Damien-X", callback_data="add_to_grp")
+                    [[InlineKeyboardButton("🗣 OWNER", url=f"t.me/{u_n}"),
+                    InlineKeyboardButton("💬 CHANNEL", url="t.me/DamienSoukara")],
+                    [InlineKeyboardButton("©️ ＬＯＧＩＮ : ＤＡＭＩＥＮ-Ｘ", callback_data="add_to_grp")
                     ]]
                 )
             )
@@ -149,7 +148,7 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
                     reply_markup=InlineKeyboardMarkup(buttons)
             )
         else:
-            await callback_query.answer("ONLY MY OWNER CAN DO THAT !", show_alert=True)
+            await callback_query.answer("⚠️ ONLY MY OWNER CAN DO THAT ! ⚠️", show_alert=True)
 
 
 @userge.on_cmd("users", about={
@@ -157,7 +156,7 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
     'examples': "{tr}bot_users"},
     allow_channels=False)
 async def bot_users(message: Message):
-    """Users Who Stated Your Bot by - /start"""
+    """Users Who Stated Your Bot By : /start"""
     msg = ""
     async for c in BOT_START.find():  
         msg += f"● ID: <code>{c['user_id']}</code>\n   <b>Name:</b> {c['firstname']},  <b>Date:</b> `{c['date']}`\n"
