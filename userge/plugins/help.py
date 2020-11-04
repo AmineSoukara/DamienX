@@ -992,7 +992,7 @@ if userge.has_bot:
                     switch_pm_parameter="inline",
                 )
         else:
-            results.append(REPO_X, MAIN_MENU)
+            results.append(REPO_X)
             owner_name = (await userge.get_me()).first_name
             await inline_query.answer(
                 results=results,
