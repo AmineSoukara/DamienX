@@ -20,7 +20,7 @@ ALLOWED_COLLECTION = get_collection("PM_PERMIT")
 
 pmCounter: Dict[int, int] = {}
 allowAllFilter = filters.create(lambda _, __, ___: Config.ALLOW_ALL_PMS)
-noPmMessage = bk_noPmMessage = ("Hello {fname} This Is An Automated Message\n"
+noPmMessage = bk_noPmMessage = ("Hello {mention} This Is An Automated Message\n"
                                 "Please Wait Until You Get Approved To Direct Message "
                                 "And Please Dont Spam Until Then")
 blocked_message = bk_blocked_message = "**[⛔](https://telegra.ph/file/25494e562a913bd02ed31.mp4) You Were Automatically Blocked ⛔**"
