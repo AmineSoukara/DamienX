@@ -121,8 +121,8 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
                 caption=caption_text,
                 reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("🗣 CONTACT", url=f"t.me/{u_n}"),
-                    InlineKeyboardButton("🗒 REPO", url="https://github.com/aminesoukara/damien-X")],
-                    [InlineKeyboardButton("➕ ADD TO GROUP", callback_data="add_to_grp")
+                    InlineKeyboardButton("🗒 REPO", url="https://github.com/AmineSoukara/Damien-X")],
+                    [InlineKeyboardButton("©️ Login Damien-X", callback_data="add_to_grp")
                     ]]
                 )
             )
@@ -138,18 +138,21 @@ Nice To Meet You! I'm **{bot.first_name}** A Bot.
         u_id = callback_query.from_user.id 
         if u_id == Config.OWNER_ID:
             botname = (await userge.bot.get_me()).username
-            msg = "**🤖 Add Your Bot to Group** \n\n <u>Note:</u>  <i>Admin Privilege Required !</i>"
+            msg = "**✅ Login Successfully :** \n\n <u>Note:</u>  <i>Admin Privilege Required !</i>"
             add_bot = f"http://t.me/{botname}?startgroup=start"
-            buttons = [[InlineKeyboardButton("➕ PRESS TO ADD", url=add_bot)]]
+            buttons = [[
+        InlineKeyboardButton("🌪 Go Inline", switch_inline_query_current_chat=''),
+        InlineKeyboardButton("➕ PRESS TO ADD", url=add_bot),
+    ]]
             await callback_query.edit_message_text(
                     msg,
                     reply_markup=InlineKeyboardMarkup(buttons)
             )
         else:
-            await callback_query.answer("ONLY MY MASTER CAN DO THAT ! \n\n 𝘿𝙚𝙥𝙡𝙤𝙮 𝙮𝙤𝙪𝙧 𝙤𝙬𝙣 𝙐𝙎𝙀𝙍𝙂𝙀-𝙓 !", show_alert=True)
+            await callback_query.answer("ONLY MY OWNER CAN DO THAT !", show_alert=True)
 
 
-@userge.on_cmd("bot_users", about={
+@userge.on_cmd("users", about={
     'header': "Get a list Active Users Who started your Bot",
     'examples': "{tr}bot_users"},
     allow_channels=False)
@@ -157,6 +160,6 @@ async def bot_users(message: Message):
     """Users Who Stated Your Bot by - /start"""
     msg = ""
     async for c in BOT_START.find():  
-        msg += f"• <i>ID:</i> <code>{c['user_id']}</code>\n   <b>Name:</b> {c['firstname']},  <b>Date:</b> `{c['date']}`\n"
+        msg += f"● ID: <code>{c['user_id']}</code>\n   <b>Name:</b> {c['firstname']},  <b>Date:</b> `{c['date']}`\n"
     await message.edit_or_send_as_file(
         f"<u><i><b>Bot PM Userlist</b></i></u>\n\n{msg}" if msg else "`Nobody Does it Better`")
