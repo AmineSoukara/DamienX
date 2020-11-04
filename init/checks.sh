@@ -55,7 +55,7 @@ _checkDefaultVars() {
         [LOAD_UNOFFICIAL_PLUGINS]=true
         [G_DRIVE_IS_TD]=true
         [CMD_TRIGGER]="."
-        [SUDO_TRIGGER]="!"
+        [SUDO_TRIGGER]="/"
         [FINISHED_PROGRESS_STR]="█"
         [UNFINISHED_PROGRESS_STR]="░"
     )
