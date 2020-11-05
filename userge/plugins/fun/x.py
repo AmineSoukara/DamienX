@@ -14,7 +14,7 @@ from userge import Config, Message, userge
 @userge.on_cmd(
     "x",
     about={
-        "header": "USERGE-X",
+        "header": "DAMIEN-X",
         "flags": {"-alt": "To get inverted X", "-ghost": "spooky ghost"},
     },
     check_downpath=True,
@@ -25,7 +25,7 @@ async def usx_(message: Message):
     elif "-ghost" in message.flags:
         path = "resources/ghosts.png"
     else:
-        path = "resources/logo.png"
+        path = "resources/logo.png "
 
     replied = message.reply_to_message
     await message.edit("𝐗")
