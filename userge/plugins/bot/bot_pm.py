@@ -136,10 +136,15 @@ You Can Talk/Contact My **Owner** Using This Bot.
             botname = (await userge.bot.get_me()).username
             msg = "**✅ Login Successfully :** \n\n <u>Note:</u>  <i>👑 Admin Privilege Required !</i>\n\n<b>⚙ Available Commands :</b> \n\n● /bot_fwd - Enable / Disable Bot Forwards, (Works Only In Bot Pm) \n● /ban - Ban A User From Bot PM [user_id/user_name] Reason Or [Reply To Forwarded Message With Reason] \n● /broadcast - Send A Broadcast Message To Users In Your StartList (Can Work Outside Bot PM)  [Reply To A Message] \n● /unbban -  Unban Users That Are In BotBanList [user_id/user_name] Check bblist For Banned Users. \n● /bblist - Users Banned From Your Bot's PM \n● /users - Get A List Active Users Who Started Your Bot"
             add_bot = f"http://t.me/{botname}?startgroup=start"
+            i_bot = f"https://t.me/{botname}?start=inline"
             buttons = [[
-        InlineKeyboardButton("🌪 Go Inline", switch_inline_query_current_chat=''),
-        InlineKeyboardButton("➕ PRESS TO ADD", url=add_bot),
-    ]]
+                InlineKeyboardButton("🌪 Go Inline", switch_inline_query_current_chat=''),
+                InlineKeyboardButton("👨‍💻 Main Menu", callback_data="mm".encode()),
+                ],
+                [
+                InlineKeyboardButton("🧠 Inline Help", url=i_bot),
+                InlineKeyboardButton("➕ PRESS TO ADD", url=add_bot),
+               ]]
             await callback_query.edit_message_text(
                     msg,
                     reply_markup=InlineKeyboardMarkup(buttons)
