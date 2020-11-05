@@ -31,7 +31,7 @@ from userge.utils import progress, take_screen_shot, humanbytes
 LOGGER = userge.getLogger(__name__)
 CHANNEL = userge.getCLogger(__name__)
 
-LOGO_PATH = 'resources/userge.png'
+LOGO_PATH = 'resources/unnamed.jpg'
 
 
 @userge.on_cmd("rename", about={
