@@ -36,14 +36,14 @@ if userge.has_bot:
         f_username = message.from_user.username
         u_n = master.username
         hello = f"""
-Hello **{f_name}**, Nice To Meet You, Well I Am **{bot.first_name}**, An Powerfull Assistant Bot.
-You Can Talk/Contact My **Master** Using This Bot.
+Hello **{f_name}**, 👋
+Nice To Meet You, Well I Am **{bot.first_name}**, A Bot. <b>Powered By : [Damien-X](https://t.me/DamienSoukara)</b>
 
-<i><b>● Powered By :</i> [Damien-X](https://t.me/DamienSoukara)</b>
+You Can Talk/Contact My **Owner** Using This Bot.
 """
         if Config.BOT_FORWARDS:          
-            hello += "\n<b>ℹ NOTE : </b> "
-            hello += "**Bot Forwarding Is** :  ✅ `Enabled`\n"
+            hello += "\n<b>ℹ</b> "
+            hello += "**ＢＯＴ ＦＯＲＷＡＲＤＩＮＧ ＩＳ** :  ✅ `ＯＮ`\n"
             hello += "All Ur Messages Here Will Be Forwared To My **Owner**"
         if u_id != Config.OWNER_ID:
             found = await BOT_START.find_one({'user_id': u_id})
@@ -135,7 +135,7 @@ You Can Talk/Contact My **Master** Using This Bot.
         u_id = callback_query.from_user.id 
         if u_id == Config.OWNER_ID:
             botname = (await userge.bot.get_me()).username
-            msg = "**✅ Login Successfully :** \n\n <u>Note:</u>  <i>Admin Privilege Required !</i>"
+            msg = "**✅ Login Successfully :** \n\n <u>Note:</u>  <i>👑 Admin Privilege Required !</i>\n\n<b>⚙ Available Commands :</b> \n\n● /bot_fwd - Enable / Disable Bot Forwards, (Works Only In Bot Pm) \n● /ban - Ban A User From Bot PM [user_id/user_name] Reason Or [Reply To Forwarded Message With Reason] \n● /broadcast - Send A Broadcast Message To Users In Your StartList (Can Work Outside Bot PM)  [Reply To A Message] \n● /unbban -  Unban Users That Are In BotBanList [user_id/user_name] Check bblist For Banned Users. \n● /bblist - Users Banned From Your Bot's PM \n● /users - Get A List Active Users Who Started Your Bot"
             add_bot = f"http://t.me/{botname}?startgroup=start"
             buttons = [[
         InlineKeyboardButton("🌪 Go Inline", switch_inline_query_current_chat=''),
