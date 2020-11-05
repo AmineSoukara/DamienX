@@ -1,18 +1,18 @@
 {
-    "name": "USERGE-X",
-    "description": "telegram pluggable userbot",
-    "logo": "https://i.imgur.com/PlXD0aL.png",
+    "name": "DAMIEN-X",
+    "description": "Telegram Pluggable Userbot",
+    "logo": "https://telegra.ph/file/20f24ed46088c19296c1a.jpg",
     "keywords": [
-        "USERGE-X",
+        "DAMIEN-X",
         "telegram",
         "pluggable",
         "userbot",
         "Dual Mode",
         "Pyrogram"
     ],
-    "repository": "https://github.com/code-rgb/USERGE-X",
-    "website": "https://github.com/code-rgb/USERGE-X",
-    "success_url": "https://t.me/x_xtests",
+    "repository": "https://github.com/AmineSoukara/Damie-X",
+    "website": "https://github.com/AmineSoukara/Damie-X",
+    "success_url": "https://t.me/DamienSoukara",
     "env": {
         "API_ID": {"description": "Get this value from https://my.telegram.org"},
         "API_HASH": {"description": "Get this value from https://my.telegram.org"},
