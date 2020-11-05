@@ -37,13 +37,12 @@ if userge.has_bot:
         u_n = master.username
         hello = f"""
 Hello **{f_name}**, 👋
-Nice To Meet You, Well I Am **{bot.first_name}**, A Bot. <b>Powered By : [Damien-X](https://t.me/DamienSoukara)</b>
-
+Nice To Meet You, Well I Am **{bot.first_name}**, A Bot.
 You Can Talk/Contact My **Owner** Using This Bot.
 """
         if Config.BOT_FORWARDS:          
-            hello += "\n<b>ℹ</b> "
-            hello += "**ＢＯＴ ＦＯＲＷＡＲＤＩＮＧ ＩＳ** :  ✅ `ＯＮ`\n"
+            hello += "\n<b>✅</b> "
+            hello += "**ＢＯＴ ＦＯＲＷＡＲＤＩＮＧ ＩＳ** : 𝗢𝗡\n"
             hello += "All Ur Messages Here Will Be Forwared To My **Owner**"
         if u_id != Config.OWNER_ID:
             found = await BOT_START.find_one({'user_id': u_id})
