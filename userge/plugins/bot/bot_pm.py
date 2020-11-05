@@ -138,7 +138,7 @@ You Can Talk/Contact My **Owner** Using This Bot.
             add_bot = f"http://t.me/{botname}?startgroup=start"
             buttons = [[
         InlineKeyboardButton("🌪 Go Inline", switch_inline_query_current_chat=''),
-        InlineKeyboardButton("➕ PRESS TO ADD Back", callback_data="_send_botstart"),
+        InlineKeyboardButton("➕ PRESS TO ADD Back", callback_data="mm".encode()),
     ]]
             await callback_query.edit_message_text(
                     msg,
