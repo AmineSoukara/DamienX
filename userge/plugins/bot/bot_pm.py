@@ -142,7 +142,7 @@ You Can Talk/Contact My **Owner** Using This Bot.
                 ],
                 [
                 InlineKeyboardButton("➕ PRESS TO ADD", url=add_bot),
-                InlineKeyboardButton("botstart", callback_data="BOT_START".find()),
+                InlineKeyboardButton("botstart", switch_pm_parameter="inline"),
                ]]
             await callback_query.edit_message_text(
                     msg,
