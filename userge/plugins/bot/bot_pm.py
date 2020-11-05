@@ -151,7 +151,7 @@ You Can Talk/Contact My **Owner** Using This Bot.
 
 @userge.on_cmd("users", about={
     'header': "Get a list Active Users Who started your Bot",
-    'examples': "{tr}bot_users"},
+    'examples': "{tr}users"},
     allow_channels=False)
 async def bot_users(message: Message):
     """Users Who Stated Your Bot By : /start"""
