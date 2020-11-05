@@ -198,7 +198,7 @@ if userge.has_bot:
         cur_pos = str(callback_query.matches[0].group(1))
         pos_list = cur_pos.split("|")
         if len(pos_list) == 1:
-            await callback_query.answer("you are in main menu", show_alert=True)
+            await callback_query.answer("You Are In main menu", show_alert=True)
             return
         if len(pos_list) == 2:
             text = "🖥 @AmineSoukara - **Main Menu** 🖥"
@@ -342,7 +342,7 @@ if userge.has_bot:
             )
             if len(cur_pos.split("|")) > 2:
                 tmp_btns.append(
-                    InlineKeyboardButton("🖥 Main Menu", callback_data="mm".encode())
+                    InlineKeyboardButton("Main ⭕ Menu", callback_data="mm".encode())
                 )
                 tmp_btns.append(
                     InlineKeyboardButton(
