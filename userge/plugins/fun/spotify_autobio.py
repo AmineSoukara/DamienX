@@ -31,7 +31,7 @@ USER_INITIAL_BIO = {}
 
 KEY = "🎶"
 BIOS = [
-    KEY + " Vibing ; {interpret} - {title} {progress}/{duration}",
+    KEY + " Vibing : {interpret} - {title} {progress}/{duration}",
     KEY + " Vibing : {interpret} - {title}",
     KEY + " : {interpret} - {title}",
     KEY + " Vibing : {title}",

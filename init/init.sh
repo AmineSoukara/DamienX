@@ -18,9 +18,9 @@ trap handleSigInt INT
 initUserge() {
     printLogo
     assertPrerequisites
-    sendMessage "Initializing USERGE-X ..."
+    sendMessage "💬 Initializing DAMIEN-X ..."
     assertEnvironment
-    editLastMessage "Starting USERGE-X ..."
+    editLastMessage "✅ Starting DAMIEN-X ..."
     printLine
 }
 
@@ -29,19 +29,19 @@ startUserge() {
 }
 
 stopUserge() {
-    sendMessage "Exiting USERGE-X ..."
+    sendMessage "⚠️ Exiting DAMIEN-X ..."
     exit 0
 }
 
 handleSigTerm() {
-    log "Exiting With SIGTERM (143) ..."
+    log "💬 Exiting With SIGTERM (143) ..."
     stopUserge
     endLogBotPolling
     exit 143
 }
 
 handleSigInt() {
-    log "Exiting With SIGINT (130) ..."
+    log "💬 Exiting With SIGINT (130) ..."
     stopUserge
     endLogBotPolling
     exit 130

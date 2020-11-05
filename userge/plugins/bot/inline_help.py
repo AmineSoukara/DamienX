@@ -14,10 +14,10 @@ HELP_BUTTONS = None
 COMMANDS = {
     "secret": {
         "help_txt": "**Send a secret message to a user**\n (only the entered user and you can view  the message)\n\n>>>  `secret @username [text]`",
-        "i_q": "secret @DeletedUser420 This is a secret message",
+        "i_q": "secret @AmineSoukara This is a secret message",
     },
     "alive": {
-        "help_txt": "**Alive Command for USERGE-X**\n\nThis You can view Uptime, Setting and Versions of your bot and when you change settings they are updayted in Real-time UwU\n>>>  `alive`",
+        "help_txt": "**Alive Command for DAMIEN-X**\n\nThis You can view Uptime, Setting and Versions of your bot and when you change settings they are updayted in Real-time UwU\n>>>  `alive`",
         "i_q": "alive",
     },
     "opinion": {
@@ -25,7 +25,7 @@ COMMANDS = {
         "i_q": "op Are Cats Cute ?",
     },
     "repo": {
-        "help_txt": "**Your USERGE-X Github repo**\n\nwith direct deploy button\n>>>  `repo`",
+        "help_txt": "**Your DAMIEN-X Github repo**\n\nwith direct deploy button\n>>>  `repo`",
         "i_q": "repo",
     },
     "gapps": {
@@ -50,7 +50,7 @@ COMMANDS = {
     },
     "stylish": {
         "help_txt": "**Write it in Style**\n\nplugin to decorate text with unicode fonts.\n>>>  `stylish [text]`",
-        "i_q": "stylish USERGE-X",
+        "i_q": "stylish DAMIEN-X",
     },
     "ytdl": {
         "help_txt": "**Download Youtube Videos with Buttons**\n\nTo Download video from youtube with desired quality.\n>>>  `ytdl [link]`",

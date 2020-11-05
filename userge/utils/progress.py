@@ -35,7 +35,7 @@ async def progress(current: int,
             return
         del _TASKS[task_id]
         try:
-            await message.try_to_edit("`finalizing process ...`")
+            await message.try_to_edit("🧙‍♀️ Finalizing Process ...")
         except FloodWait as f_e:
             time.sleep(f_e.x)
         return
@@ -50,35 +50,25 @@ async def progress(current: int,
         speed = current / elapsed_time
         time_to_completion = time_formatter(int((total - current) / speed))
         progress_str = \
-            "__{}__ : `{}`\n" + \
+            "{} : {}\n" + \
             "```[{}{}]```\n" + \
-            "**Progress** : `{}%`\n" + \
-            "**Completed** : `{}`\n" + \
-            "**Total** : `{}`\n" + \
-            "**Speed** : `{}/s`\n" + \
-            "**ETA** : `{}`"
+            "**⏳ Progress** : {}%\n" + \
+            "**🗂 Completed** : {}\n" + \
+            "**💾 Total** : {}\n" + \
+            "**🚀 Speed** : {}/s\n" + \
+            "**⏱ ETA** : {}"
         progress_str = progress_str.format(
             ud_type,
             file_name,
-            ''.join(
-                (
-                    userge.Config.FINISHED_PROGRESS_STR
-                    for i in range(floor(percentage / 5))
-                )
-            ),
-            ''.join(
-                (
-                    userge.Config.UNFINISHED_PROGRESS_STR
-                    for i in range(20 - floor(percentage / 5))
-                )
-            ),
+            ''.join((userge.Config.FINISHED_PROGRESS_STR
+                     for i in range(floor(percentage / 5)))),
+            ''.join((userge.Config.UNFINISHED_PROGRESS_STR
+                     for i in range(20 - floor(percentage / 5)))),
             round(percentage, 2),
             humanbytes(current),
             humanbytes(total),
             humanbytes(speed),
-            time_to_completion or "0 s",
-        )
-
+            time_to_completion if time_to_completion else "0 s")
         try:
             await message.try_to_edit(progress_str)
         except FloodWait as f_e:

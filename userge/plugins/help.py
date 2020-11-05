@@ -36,7 +36,7 @@ from .misc.redditdl import reddit_thumb_link
 MEDIA_TYPE, MEDIA_URL = None, None
 PATH = "userge/xcache"
 _CATEGORY = {
-    "admin": "🙋🏻‍♂️",
+    "admin": "👑",
     "fun": "🎨",
     "misc": "🧩",
     "tools": "🧰",
@@ -44,41 +44,31 @@ _CATEGORY = {
     "unofficial": "➕",
     "temp": "♻️",
     "plugins": "💎",
-    "bot": "💠",
+    "bot": "🤖",
 }
 # Database
 SAVED_SETTINGS = get_collection("CONFIGS")
 BUTTON_BASE = get_collection("TEMP_BUTTON")  # TODO use json cache
 REPO_X = InlineQueryResultArticle(
-    title="Repo",
-    input_message_content=InputTextMessageContent("**Here's how to setup USERGE-X** "),
-    url="https://github.com/code-rgb/USERGE-X",
-    description="Setup Your Own",
-    thumb_url="https://i.imgur.com/1xsOo9o.png",
+    title="@AmineSoukara",
+    input_message_content=InputTextMessageContent("**⚡ l'M FAST AS FUCK BOI ⚡**"),
+    url="https://t.me/AmineSoukara",
+    description="Owner & Channel & Deploy",
+    thumb_url="https://telegra.ph/file/96e64e6f514cb3ed6be85.jpg",
     reply_markup=InlineKeyboardMarkup(
-        [
-            [
-                InlineKeyboardButton(
-                    "🔥 USERGE-X Repo", url="https://github.com/code-rgb/USERGE-X"
-                ),
-                InlineKeyboardButton(
-                    "🚀 Deploy USERGE-X",
-                    url=(
-                        "https://heroku.com/deploy?template="
-                        "https://github.com/code-rgb/USERGE-X/tree/alpha"
-                    ),
-                ),
-            ]
-        ]
-    ),
-)
-# Thanks boi @FLAMEPOSEIDON
+                    [[InlineKeyboardButton("👑 My Owner", url=f"t.me/AmineSoukara"),
+                    InlineKeyboardButton("💬 Channel", url="t.me/DamienSoukara")],
+                    [InlineKeyboardButton("🔥 Deploy DAMIEN-X", url="https://heroku.com/deploy?template=https://github.com/AmineSoukara/Damien-X/tree/alpha")
+                    ]]
+                )
+            )
+#
 ALIVE_IMGS = [
-    "https://telegra.ph/file/11123ef7dff2f1e19e79d.jpg",
-    "https://i.imgur.com/uzKdTXG.jpg",
-    "https://telegra.ph/file/6ecab390e4974c74c3764.png",
-    "https://telegra.ph/file/995c75983a6c0e4499b55.png",
-    "https://telegra.ph/file/86cc25c78ad667ca5e691.png",
+    "https://telegra.ph/file/20f24ed46088c19296c1a.jpg",
+    "https://telegra.ph/file/5265d24f7f81a86d15b15.mp4",
+    "https://telegra.ph/file/96e64e6f514cb3ed6be85.jpg",
+    "https://telegra.ph/file/849ed260d2f2c590dfdfa.mp4",
+    "https://telegra.ph/file/719735c38b131fa7a0048.mp4",
 ]
 
 
@@ -166,7 +156,7 @@ if userge.has_bot:
             else:
                 user_dict = await userge.bot.get_user_dict(Config.OWNER_ID)
                 await c_q.answer(
-                    f"Only {user_dict['flname']} Can Access this...! Build Your USERGE-X",
+                    f"Only {user_dict['flname']} Can Access This...!",
                     show_alert=True,
                 )
 
@@ -193,7 +183,7 @@ if userge.has_bot:
             buttons = parse_buttons(
                 p_num,
                 cur_pos,
-                lambda x: f"🔹 {x}",
+                lambda x: f"{x}",
                 userge.manager.get_all_plugins()[pos_list[-1]],
             )
         elif len(pos_list) == 3:
@@ -211,7 +201,7 @@ if userge.has_bot:
             await callback_query.answer("you are in main menu", show_alert=True)
             return
         if len(pos_list) == 2:
-            text = " 𝐔𝐒𝐄𝐑𝐆𝐄-𝐗  𝗠𝗔𝗜𝗡 𝗠𝗘𝗡𝗨"
+            text = "🖥 @AmineSoukara - **Main Menu** 🖥"
             buttons = main_menu_buttons()
         elif len(pos_list) == 3:
             text, buttons = category_data(cur_pos)
@@ -263,7 +253,7 @@ if userge.has_bot:
     @check_owner
     async def callback_mm(callback_query: CallbackQuery):
         await callback_query.edit_message_text(
-            " 𝐔𝐒𝐄𝐑𝐆𝐄-𝐗  𝗠𝗔𝗜𝗡 𝗠𝗘𝗡𝗨 ",
+            "🖥 @AmineSoukara - **Main Menu** 🖥",
             reply_markup=InlineKeyboardMarkup(main_menu_buttons()),
         )
 
@@ -363,7 +353,7 @@ if userge.has_bot:
             cur_clnt = "👤 USER" if Config.USE_USER_FOR_CLIENT_CHECKS else "⚙️ BOT"
             tmp_btns.append(
                 InlineKeyboardButton(
-                    f"🔩 Client for Checks and Sudos : {cur_clnt}",
+                    f"Client For Checks & Sudos : {cur_clnt}",
                     callback_data="chgclnt".encode(),
                 )
             )
@@ -376,13 +366,13 @@ if userge.has_bot:
             f"**(`{len(plugins)}`) Plugin(s) Under : "
             f"`{_CATEGORY.get(pos_list[1], '📁')} {pos_list[1]}`  Category**"
         )
-        buttons = parse_buttons(0, "|".join(pos_list[:2]), lambda x: f"🔹 {x}", plugins)
+        buttons = parse_buttons(0, "|".join(pos_list[:2]), lambda x: f"{x}", plugins)
         return text, buttons
 
     def plugin_data(cur_pos: str, p_num: int = 0):
         pos_list = cur_pos.split("|")
         plg = userge.manager.plugins[pos_list[2]]
-        text = f"""🔹 **--Plugin Status--** 🔹
+        text = f"""🔥 **--Plugin Status--** 🔥
 
 🎭 **Category** : `{pos_list[1]}`
 🔖 **Name** : `{plg.name}`
@@ -516,18 +506,18 @@ if userge.has_bot:
             or inline_query.from_user.id in Config.SUDO_USERS
         ):
 
-            if string == "syntax":
+            if string == "x":
                 owner = [
                     [
                         InlineKeyboardButton(
-                            text="Contact", url="https://t.me/deleteduser420"
+                            text="💬 Contact :", url="https://t.me/AmineSoukara"
                         )
                     ]
                 ]
                 results.append(
                     InlineQueryResultPhoto(
-                        photo_url="https://coverfiles.alphacoders.com/123/123388.png",
-                        caption="Hey I solved **𝚂𝚢𝚗𝚝𝚊𝚡's ░ Σrr♢r**",
+                        photo_url="https://telegra.ph/file/20f24ed46088c19296c1a.jpg",
+                        caption="**Боль неизбежна. Страдание необязательно**",
                         reply_markup=InlineKeyboardMarkup(owner),
                     )
                 )
@@ -683,14 +673,14 @@ if userge.has_bot:
                 buttons = [
                     [
                         InlineKeyboardButton(
-                            "🔧 SETTINGS", callback_data="settings_btn"
+                            "⚙ Settings", callback_data="settings_btn"
                         ),
                         InlineKeyboardButton(text="⚡️ REPO", url=Config.UPSTREAM_REPO),
                     ]
                 ]
 
                 alive_info = f"""
-    **[USERGE-X](https://telegram.dog/x_xtests) is Up and Running**
+    **[DAMIEN-X](https://telegram.dog/DamienSoukara) is Up and Running**
 
  • 🐍 Python :  `v{versions.__python_version__}`
  • 🔥 Pyrogram :  `v{versions.__pyro_version__}`
@@ -731,7 +721,7 @@ if userge.has_bot:
                     else:
                         results.append(
                             InlineQueryResultCachedDocument(
-                                title="USERGE-X",
+                                title="DAMIEN-X",
                                 file_id=MEDIA_URL[0],
                                 file_ref=MEDIA_URL[1],
                                 caption=alive_info,
@@ -749,11 +739,11 @@ if userge.has_bot:
                         )
                     )
 
-            if string == "geass":
+            if string == "d":
                 results.append(
                     InlineQueryResultAnimation(
-                        animation_url="https://i.imgur.com/DeZHcRK.gif",
-                        caption="To defeat evil, I must become a greater evil",
+                        animation_url="https://i.imgur.com/SyQu3Vb.gif",
+                        caption="Love Is Sacrifice ...",
                     )
                 )
 
@@ -978,19 +968,19 @@ if userge.has_bot:
                         InlineQueryResultArticle(
                             title="Send A Secret Message",
                             input_message_content=InputTextMessageContent(
-                                f"📩 <b>Secret Msg</b> for {user_name}. Only he/she can open it."
+                                f"📩 <b>Secret Msg</b> For {user_name}. Only He/She Can Open it."
                             ),
-                            description=f"Send Secret Message to: {user_name}",
+                            description=f"Send Secret Message To: {user_name}",
                             thumb_url="https://i.imgur.com/c5pZebC.png",
                             reply_markup=InlineKeyboardMarkup(buttons),
                         )
                     )
             MAIN_MENU = InlineQueryResultArticle(
                 title="Main Menu",
-                input_message_content=InputTextMessageContent(" 𝐔𝐒𝐄𝐑𝐆𝐄-𝐗  𝗠𝗔𝗜𝗡 𝗠𝗘𝗡𝗨 "),
-                url="https://github.com/code-rgb/USERGE-X",
-                description="Userge-X Main Menu",
-                thumb_url="https://i.imgur.com/1xsOo9o.png",
+                input_message_content=InputTextMessageContent("🖥 @AmineSoukara - **Main Menu** 🖥"),
+                url="https://github.com/AmineSoukara/Damien-X",
+                description="DAMIEN-X Main Menu",
+                thumb_url="https://telegra.ph/file/2e9a86a8c2c424167c8f9.jpg",
                 reply_markup=InlineKeyboardMarkup(main_menu_buttons()),
             )
             results.append(MAIN_MENU)
@@ -1007,6 +997,6 @@ if userge.has_bot:
             await inline_query.answer(
                 results=results,
                 cache_time=1,
-                switch_pm_text=f"This bot is only for {owner_name}",
+                switch_pm_text=f"🚫 This Bot Is Only For : {owner_name}",
                 switch_pm_parameter="start",
             )
