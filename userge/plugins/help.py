@@ -64,11 +64,11 @@ REPO_X = InlineQueryResultArticle(
             )
 #
 ALIVE_IMGS = [
-    "https://telegra.ph/file/11123ef7dff2f1e19e79d.jpg",
-    "https://i.imgur.com/uzKdTXG.jpg",
-    "https://telegra.ph/file/6ecab390e4974c74c3764.png",
-    "https://telegra.ph/file/995c75983a6c0e4499b55.png",
-    "https://telegra.ph/file/86cc25c78ad667ca5e691.png",
+    "https://telegra.ph/file/20f24ed46088c19296c1a.jpg",
+    "https://telegra.ph/file/5265d24f7f81a86d15b15.mp4",
+    "https://telegra.ph/file/96e64e6f514cb3ed6be85.jpg",
+    "https://telegra.ph/file/849ed260d2f2c590dfdfa.mp4",
+    "https://telegra.ph/file/719735c38b131fa7a0048.mp4",
 ]
 
 
