@@ -36,13 +36,10 @@ if userge.has_bot:
         f_username = message.from_user.username
         u_n = master.username
         hello = f"""
-Hello {f_name},
-Nice To Meet You! I'm **{bot.first_name}** A Bot.
+Hello **{f_name}**, Nice To Meet You, Well I Am **{bot.first_name}**, An Powerfull Assistant Bot.
+You Can Talk/Contact My **Master** Using This Bot.
 
-        <i><b>Powered By</i> [Damien-X](https://t.me/DamienSoukara)</b>
-
-<b>My Master is: {master.first_name}</b>
-<i>You can contact my <b>Master</b> .
+<i><b>● Powered By :</i> [Damien-X](https://t.me/DamienSoukara)</b>
 """
         if Config.BOT_FORWARDS:          
             hello += "\n<b>ℹ NOTE : </b> "
