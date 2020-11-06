@@ -43,6 +43,7 @@ _CATEGORY = {
     "utils": "🗂",
     "unofficial": "➕",
     "temp": "♻️",
+    "Damien": "👻",
     "plugins": "💎",
     "bot": "🤖",
 }
