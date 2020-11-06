@@ -18,7 +18,7 @@ BOT_BAN = get_collection("BOT_BAN")
 BOT_START = get_collection("BOT_START")
 LOGO_ID, LOGO_REF = None, None
 _CHAT, _MSG_ID = None, None
-_DEFAULT = "https://t.me/HelpBdarija/4"
+_DEFAULT = "https://t.me/DamienSoukara/4"
 
 # refresh file id and file reference from TG server
 
