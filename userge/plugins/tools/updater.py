@@ -13,7 +13,7 @@ CHANNEL = userge.getCLogger(__name__)
 @userge.on_cmd(
     "update",
     about={
-        "header": "Check Updates or Update USERGE-X",
+        "header": "Check Updates or Update DAMIEN-X",
         "flags": {
             "-pull": "pull updates",
             "-push": "push updates to heroku",
@@ -64,7 +64,7 @@ async def check_update(message: Message):
                 change_log + out, disable_web_page_preview=True
             )
         else:
-            await message.edit(f"**USERGE-X is up-to-date with [{branch}]**", del_in=5)
+            await message.edit(f"**DAMIEN-X is up-to-date with [{branch}]**", del_in=5)
         return
     if pull_from_repo:
         if out:
@@ -75,7 +75,7 @@ async def check_update(message: Message):
             )
             if not push_to_heroku:
                 await message.edit(
-                    "**USERGE-X Successfully Updated!**\n"
+                    "**DAMIEN-X Successfully Updated!**\n"
                     "`Now restarting... Wait for a while!`",
                     del_in=3,
                 )
