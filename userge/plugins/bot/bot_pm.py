@@ -24,7 +24,7 @@ _DEFAULT = "https://t.me/DamienSoukara/4"
 
 
 if userge.has_bot:
-    @userge.bot.on_message(filters.private & filters.group & filters.regex(pattern=r"^/start$"))
+    @userge.bot.on_message((filters.private | filters.group) & filters.regex(pattern=r"^/start$"))
     async def start_bot(_, message: Message):
         bot = await userge.bot.get_me()
         master = await userge.get_me()
