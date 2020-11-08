@@ -67,7 +67,7 @@ D_X = InlineQueryResultArticle(
     input_message_content=InputTextMessageContent("**⚡ l'M FAST AS FUCK BOI ⚡**"),
     url="https://t.me/AmineSoukara",
     description="Owner & Channel & Deploy",
-    thumb_url="https://telegra.ph/file/96e64e6f514cb3ed6be85.jpg",
+    thumb_url="https://telegra.ph/file/42f568e39f34b0099af2e.jpg",
     reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("👑 My Owner", url=f"t.me/AmineSoukara"),
                     InlineKeyboardButton("💬 Channel", url="t.me/DamienSoukara")],
@@ -355,7 +355,7 @@ if userge.has_bot:
             )
             if len(cur_pos.split("|")) > 2:
                 tmp_btns.append(
-                    InlineKeyboardButton("ＭＡＩＮ ⭕ ＭＥＮＵ", callback_data="mm".encode())
+                    InlineKeyboardButton("Main ⭕ Menu", callback_data="mm".encode())
                 )
                 tmp_btns.append(
                     InlineKeyboardButton(
@@ -833,7 +833,7 @@ if userge.has_bot:
                         )
                     )
 
-            if string == "repo":
+            if string == "":
                 results.append(REPO_X)
 
             if string == "":
