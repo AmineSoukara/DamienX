@@ -50,7 +50,20 @@ _CATEGORY = {
 SAVED_SETTINGS = get_collection("CONFIGS")
 BUTTON_BASE = get_collection("TEMP_BUTTON")  # TODO use json cache
 REPO_X = InlineQueryResultArticle(
-    title="@AmineSoukara",
+    title="ＤＡＭＩＥＮ-Ｘ :",
+    input_message_content=InputTextMessageContent("**[⚡](https://telegra.ph/file/20f24ed46088c19296c1a.jpg) l'M FAST AS FUCK BOI ⚡**"),
+    url="https://t.me/AmineSoukara",
+    description="Owner & Channel & Deploy",
+    thumb_url="https://telegra.ph/file/96e64e6f514cb3ed6be85.jpg",                        
+    reply_markup=InlineKeyboardMarkup(
+                    [[InlineKeyboardButton("👑 My Owner", url=f"t.me/AmineSoukara"),
+                    InlineKeyboardButton("💬 Channel", url="t.me/DamienSoukara")],
+                    [InlineKeyboardButton("🔥 Deploy DAMIEN-X", url="https://heroku.com/deploy?template=https://github.com/AmineSoukara/Damien-X/tree/alpha")
+                    ]]
+                )
+            )
+D_X = InlineQueryResultArticle(
+    title="ＤＡＭＩＥＮ-Ｘ",
     input_message_content=InputTextMessageContent("**⚡ l'M FAST AS FUCK BOI ⚡**"),
     url="https://t.me/AmineSoukara",
     description="Owner & Channel & Deploy",
@@ -201,7 +214,7 @@ if userge.has_bot:
             await callback_query.answer("You Are In main menu", show_alert=True)
             return
         if len(pos_list) == 2:
-            text = "🖥 @AmineSoukara - **Main Menu** 🖥"
+            text = "🖥 @AmineSoukara - **ＭＡＩＮ ＭＥＮＵ** 🖥"
             buttons = main_menu_buttons()
         elif len(pos_list) == 3:
             text, buttons = category_data(cur_pos)
@@ -253,7 +266,7 @@ if userge.has_bot:
     @check_owner
     async def callback_mm(callback_query: CallbackQuery):
         await callback_query.edit_message_text(
-            "🖥 @AmineSoukara - **Main Menu** 🖥",
+            "🖥 @AmineSoukara - **ＭＡＩＮ ＭＥＮＵ** 🖥",
             reply_markup=InlineKeyboardMarkup(main_menu_buttons()),
         )
 
@@ -342,7 +355,7 @@ if userge.has_bot:
             )
             if len(cur_pos.split("|")) > 2:
                 tmp_btns.append(
-                    InlineKeyboardButton("Main ⭕ Menu", callback_data="mm".encode())
+                    InlineKeyboardButton("ＭＡＩＮ ⭕ ＭＥＮＵ", callback_data="mm".encode())
                 )
                 tmp_btns.append(
                     InlineKeyboardButton(
@@ -673,7 +686,7 @@ if userge.has_bot:
                 buttons = [
                     [
                         InlineKeyboardButton(
-                            "⚙ Settings", callback_data="settings_btn"
+                            "⚙ SETTINGS", callback_data="settings_btn"
                         ),
                         InlineKeyboardButton(text="⚡️ REPO", url=Config.UPSTREAM_REPO),
                     ]
@@ -822,6 +835,9 @@ if userge.has_bot:
 
             if string == "repo":
                 results.append(REPO_X)
+
+            if string == "":
+                results.append(D_X)
 
             if str_x[0].lower() == "op" and len(str_x) > 1:
                 txt = i_q[3:]
@@ -976,8 +992,8 @@ if userge.has_bot:
                         )
                     )
             MAIN_MENU = InlineQueryResultArticle(
-                title="Main Menu",
-                input_message_content=InputTextMessageContent("🖥 @AmineSoukara - **Main Menu** 🖥"),
+                title="ＭＡＩＮ ＭＥＮＵ :",
+                input_message_content=InputTextMessageContent("🖥 @AmineSoukara - **ＭＡＩＮ ＭＥＮＵ** 🖥"),
                 url="https://github.com/AmineSoukara/Damien-X",
                 description="DAMIEN-X Main Menu",
                 thumb_url="https://telegra.ph/file/2e9a86a8c2c424167c8f9.jpg",
