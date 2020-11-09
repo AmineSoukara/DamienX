@@ -1,2 +1,2 @@
-worker: bash run
-fsub: python3 bot.py
+Damien: bash run
+Fsub: python3 bot.py
