@@ -75,8 +75,13 @@ if userge.has_bot:
             await dumper(msg_owner.message_id, message.from_user.id, update)
 
     @userge.bot.on_message(
-        allowForwardFilter & filters.user(Config.OWNER_ID) &
-        filters.private & filters.reply & ~filters.regex(pattern=r"^\/.+")
+        allowForwardFilter
+        & filters.user(Config.OWNER_ID)
+        & filters.private
+        & filters.reply
+        & ~filters.regex(
+            pattern="^(/.*|\{}spoiler(?:$|.*))".format(Config.SUDO_TRIGGER)
+        )
     )
     async def forward_reply(_, message: Message):
         replied = message.reply_to_message
