@@ -11,12 +11,15 @@
 import asyncio
 from typing import Dict
 
-from userge import userge, filters, Message, Config, get_collection
+from userge import Config, Message, filters, get_collection, userge
 from userge.utils import SafeDict
+from userge.utils.miscellaneous import reported_user_image
 
 CHANNEL = userge.getCLogger(__name__)
 SAVED_SETTINGS = get_collection("CONFIGS")
 ALLOWED_COLLECTION = get_collection("PM_PERMIT")
+PMPERMIT_MSG = {}
+
 
 pmCounter: Dict[int, int] = {}
 allowAllFilter = filters.create(lambda _, __, ___: Config.ALLOW_ALL_PMS)
@@ -215,11 +218,16 @@ async def uninvitedPmHandler(message: Message):
     if message.from_user.id in pmCounter:
         if pmCounter[message.from_user.id] > 3:
             del pmCounter[message.from_user.id]
-            await message.reply(blocked_message)
+            # await message.reply(blocked_message)
+            report_img_ = await reported_user_image(message.from_user.first_name)
+            await userge.send_photo(
+                message.chat.id, report_img_, caption=blocked_message
+            )
             await message.from_user.block()
             await asyncio.sleep(1)
             await CHANNEL.log(
-                f"#BLOCKED\n{user_dict['mention']} has been blocked due to spamming in pm !! ")
+                f"#BLOCKED\n{user_dict['mention']} has been blocked due to spamming in pm !! "
+            )
         else:
             pmCounter[message.from_user.id] += 1
             await message.reply(
