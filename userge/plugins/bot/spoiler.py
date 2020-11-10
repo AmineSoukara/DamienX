@@ -112,18 +112,12 @@ async def spoiler_get(_, message: Message):
         if mid:
             try:
                 await CHANNEL.forward_stored(
-        client=userge.bot,
-        message_id=mid["msg_id"],
-        user_id=message.from_user.id,
-        chat_id=message.chat.id,
-        reply_to_message_id=message.message_id,
-    )
-    log_msg = (
-        f"A New User Viewed Spoiler ID: `{spoiler_key}` \n\n• <i>ID</i>: `{message.from_user.id}`\n   👤 : "
-    )
-    log_msg += "@" + message.from_user.username if message.from_user.username else message.from_user.first_name
-    await CHANNEL.log(log_msg)
-
+                    client=userge.bot,
+                    message_id=mid["msg_id"],
+                    user_id=u_user.id,
+                    chat_id=message.chat.id,
+                    reply_to_message_id=message.message_id,
+                )
             except UserIsBlocked:
                 pass
         else:
