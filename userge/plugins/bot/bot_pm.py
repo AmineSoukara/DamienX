@@ -52,7 +52,7 @@ You Can Talk/Contact My **Owner** Using This Bot.
                 start_date = d2.replace(',', '')
                 u_n = master.username
                 BOT_START.insert_one({'firstname': f_name, 'user_id': u_id, 'date': start_date})
-                await asyncio.sleep(2)
+                await asyncio.sleep(5)
                 log_msg = f"🆕️ A New User Started your Bot \n\n• <i>ID</i>: `{u_id}`\n   👤 : "
                 log_msg += f"@{f_username}" if f_username else f_name 
                 await CHANNEL.log(log_msg)
