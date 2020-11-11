@@ -1,6 +1,6 @@
 version: "1"
 rules:
-  - base: alpha
-    upstream: AmineSoukara:dev
+  - base: Dev
+    upstream: AmineSoukara:Dev
     mergeMethod: rebase
     mergeUnstable: false
