@@ -839,7 +839,7 @@ if userge.has_bot:
             if string == "Repo":
                 results.append(D_X)
 
-            if str_y[0] == "spoiler":
+            if str_y[0] == "Damien":
                 if not os.path.exists("./userge/xcache/spoiler_db.json"):
                     results.append(
                         InlineQueryResultArticle(
