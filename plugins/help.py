@@ -28,22 +28,27 @@ def force_answer(client, callback_query):
 
 
 def map(pos):
-    if(pos==1):
-        button = [
+    if (pos==1):
+        return [
             [InlineKeyboardButton(text = '➡️', callback_data = "force+2")]
         ]
-    elif(pos==len(tr.HELP_MSG)-1):
+    elif pos==len(tr.HELP_MSG)-1:
         url = "https://t.me/damienhelp"
-        button = [
-            [InlineKeyboardButton(text = '🔔 Updates Channel 🔔', url="https://t.me/DamienSoukara")],
-            [InlineKeyboardButton(text = '📣 Support Chat 📣', url=url)],
-            [InlineKeyboardButton(text = '⬅️', callback_data = f"force+{pos-1}")]
+        return [
+            [
+                InlineKeyboardButton(
+                    text='🔔 Updates Channel 🔔',
+                    url="https://t.me/DamienSoukara",
+                )
+            ],
+            [InlineKeyboardButton(text='📣 Support Chat 📣', url=url)],
+            [InlineKeyboardButton(text='⬅️', callback_data=f"force+{pos-1}")],
         ]
+
     else:
-        button = [
+        return [
             [
                 InlineKeyboardButton(text = '⬅️', callback_data = f"force+{pos-1}"),
                 InlineKeyboardButton(text = '➡️', callback_data = f"force+{pos+1}")
             ],
         ]
-    return button

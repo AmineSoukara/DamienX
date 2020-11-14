@@ -11,11 +11,11 @@ logging.basicConfig(level=logging.INFO)
 static_data_filter = filters.create(lambda _, __, query: query.data == "onUnMuteRequest")
 @Client.on_callback_query(static_data_filter)
 def _onUnMuteRequest(client, cb):
-  user_id = cb.from_user.id
   chat_id = cb.message.chat.id
   chat_db = sql.fs_settings(chat_id)
   if chat_db:
     channel = chat_db.channel
+    user_id = cb.from_user.id
     chat_member = client.get_chat_member(chat_id, user_id)
     if chat_member.restricted_by:
       if chat_member.restricted_by.id == (client.get_me()).id:
@@ -29,7 +29,8 @@ def _onUnMuteRequest(client, cb):
       else:
         client.answer_callback_query(cb.id, text="❗ You Are Muted By Admins For Other Reasons.", show_alert=True)
     else:
-      if not client.get_chat_member(chat_id, (client.get_me()).id).status == 'administrator':
+      if (client.get_chat_member(chat_id, (client.get_me()).id).status !=
+          'administrator'):
         client.send_message(chat_id, f"❗ **{cb.from_user.mention} Is Trying To UnMute Himself But I Can't Unmute Him Because I Am Not An Admin In This Chat Add Me As Admin Again.**\n#Leaving This Chat ...")
         client.leave_chat(chat_id)
       else:
@@ -43,7 +44,9 @@ def _check_member(client, message):
   chat_db = sql.fs_settings(chat_id)
   if chat_db:
     user_id = message.from_user.id
-    if not client.get_chat_member(chat_id, user_id).status in ("administrator", "creator") and not user_id in Config.SUDO_USERS:
+    if (client.get_chat_member(
+        chat_id, user_id).status not in ("administrator", "creator")
+        and user_id not in Config.SUDO_USERS):
       channel = chat_db.channel
       try:
         client.get_chat_member(channel, user_id)
