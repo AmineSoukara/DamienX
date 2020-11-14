@@ -1,4 +1,4 @@
-"""code-rgb experiments"""
+"""Xbot Experiments"""
 
 # By code-rgb
 
