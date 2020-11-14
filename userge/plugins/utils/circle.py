@@ -16,7 +16,7 @@ PATH = os.path.join(CACHE, "temp_vid.mp4")
 
 
 @userge.on_cmd(
-    "circle",
+    "vn",
     about={
         "header": "Convert video / gif / audio to video note",
         "usage": "{tr}circle [reply to media]",
