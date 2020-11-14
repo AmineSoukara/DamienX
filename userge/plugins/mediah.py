@@ -19,7 +19,7 @@ async def media_h(message: Message):
     if not reply:
         return await message.err('reply to a message')
     start = time.time()
-    await message.edit('This process takes soo much F*ing Time ð so here\'s a quote ðââï¸\n\n`\"All you gotta do is chill out... Let go of control and chill out... Let it be, Trust.\"`\n- **Esther Hicks**')
+    await message.edit('This process takes soo much F*ing Time 😅 so here\'s a quote \n\n`\"All you gotta do is chill out... Let go of control and chill out... Let it be, Trust.\"`\n- **Esther Hicks**')
     x = PrettyTable()
     media_dict = {}
     # Generate json
@@ -51,12 +51,12 @@ async def media_h(message: Message):
             largest += f"â¢  [{mediax}]({media_dict[mediax]['max_file_link']}) : <code>{humanbytes(media_dict[mediax]['max_size'])}</code>\n"
 
     result = f"<b>{message.chat.title}</b>\n"
-    result += f"ð¤ <b>User</b> : {u_mention}\n"
+    result += f"👻 <b>User</b> : {u_mention}\n"
     result += f"<code>Total Messages: {msg_count}</code>\n"
     result += f"```{str(x)}```\n"
     result += f"{largest}\n"
     end = time.time()
-    result += f"â³ <code>Process took: {time_formatter(end - start)}</code>."
+    result += f"⏳ <code>Process took: {time_formatter(end - start)}</code>."
     await message.edit(
         result,
         disable_web_page_preview=True
