@@ -51,7 +51,7 @@ class _AbstractUserge(Methods, RawClient):
 
     @property
     def uptime(self) -> str:
-        """ returns USERGE-X uptime """
+        """ Returns DAMIEN-X Uptime """
         return time_formatter(time.time() - _START_TIME)
 
     async def finalize_load(self) -> None:
@@ -59,7 +59,7 @@ class _AbstractUserge(Methods, RawClient):
         await asyncio.gather(_complete_init_tasks(), self.manager.init())
 
     async def load_plugin(self, name: str, reload_plugin: bool = False) -> None:
-        """ Load plugin to USERGE-X """
+        """ ♻️ Load Pugin To DAMIEN-X """
         _LOG.debug(_LOG_STR, f"Importing {name}")
         _IMPORTED.append(
             importlib.import_module(f"userge.plugins.{name}"))
@@ -116,12 +116,12 @@ class _UsergeBot(_AbstractUserge):
 
 
 class Userge(_AbstractUserge):
-    """ USERGE-X, the userbot """
+    """ DAMIEN-X, The Userbot """
 
     has_bot = bool(Config.BOT_TOKEN)
 
     def __init__(self, **kwargs) -> None:
-        _LOG.info(_LOG_STR, "Setting USERGE-X Configs")
+        _LOG.info(_LOG_STR, "⚙ Setting DAMIEN-X Configs")
         kwargs = {
             'api_id': Config.API_ID,
             'api_hash': Config.API_HASH,
@@ -147,24 +147,24 @@ class Userge(_AbstractUserge):
     async def start(self) -> None:
         """ start client and bot """
         pool._start()  # pylint: disable=protected-access
-        _LOG.info(_LOG_STR, "Starting USERGE-X")
+        _LOG.info(_LOG_STR, "⭕ Starting DAMIEN-X")
         await super().start()
         if self._bot is not None:
-            _LOG.info(_LOG_STR, "Starting X-bot")
+            _LOG.info(_LOG_STR, "⭕ Starting X-Bot")
             await self._bot.start()
         await self._load_plugins()
 
     async def stop(self) -> None:  # pylint: disable=arguments-differ
         """ stop client and bot """
         if self._bot is not None:
-            _LOG.info(_LOG_STR, "Stopping X-bot")
+            _LOG.info(_LOG_STR, "⚠️ Stopping X-bot")
             await self._bot.stop()
-        _LOG.info(_LOG_STR, "Stopping Userge")
+        _LOG.info(_LOG_STR, "⚠️ Stopping DAMIEN-X")
         await super().stop()
         await pool._stop()  # pylint: disable=protected-access
 
     def begin(self, coro: Optional[Awaitable[Any]] = None) -> None:
-        """ start USERGE-X """
+        """ ❗Start DAMIEN-X❗ """
         lock = asyncio.Lock()
         running_tasks: List[asyncio.Task] = []
 
@@ -181,7 +181,7 @@ class Userge(_AbstractUserge):
                 _LOG.info(_LOG_STR, "Loop Stopped !")
 
         async def _shutdown(sig: signal.Signals) -> None:
-            _LOG.info(_LOG_STR, f"Received Stop Signal [{sig.name}], Exiting USERGE-X ...")
+            _LOG.info(_LOG_STR, f"Received Stop Signal [{sig.name}], Exiting DAMIEN-X ...")
             await _finalize()
 
         for sig in (signal.SIGHUP, signal.SIGTERM, signal.SIGINT):
@@ -190,14 +190,14 @@ class Userge(_AbstractUserge):
         self.loop.run_until_complete(self.start())
         for task in self._tasks:
             running_tasks.append(self.loop.create_task(task()))
-        logbot.edit_last_msg("USERGE-X has Started Successfully !")
+        logbot.edit_last_msg("✅ DAMIEN-X Has Started Successfully !")
         logbot.end()
         try:
             if coro:
                 _LOG.info(_LOG_STR, "Running Coroutine")
                 self.loop.run_until_complete(coro)
             else:
-                _LOG.info(_LOG_STR, "Idling USERGE-X")
+                _LOG.info(_LOG_STR, "Idling DAMIEN-X")
                 idle()
             self.loop.run_until_complete(_finalize())
         except (asyncio.exceptions.CancelledError, RuntimeError):
