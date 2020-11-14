@@ -51,7 +51,7 @@ _checkDefaultVars() {
         [PREFERRED_LANGUAGE]="en"
         [DOWN_PATH]="downloads"
         [UPSTREAM_REMOTE]="upstream"
-        [UPSTREAM_REPO]="https://github.com/AmineSoukara/Damien-X"
+        [UPSTREAM_REPO]="https://github.com/AmineSoukara/Damien-X/tree/Dev"
         [LOAD_UNOFFICIAL_PLUGINS]=true
         [G_DRIVE_IS_TD]=true
         [CMD_TRIGGER]="."
@@ -162,7 +162,7 @@ _checkUnoffPlugins() {
         gitClone --depth=1 https://github.com/code-rgb/Userge-Plugins.git
         editLastMessage "\t\tUpgrading PIP ..."
         upgradePip
-        editLastMessage "\t\tInstalling Requirements ..."
+        editLastMessage "\t\t⏳ Installing Requirements ..."
         installReq Userge-Plugins
         editLastMessage "\t\tCleaning ..."
         rm -rf userge/plugins/unofficial/
