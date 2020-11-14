@@ -836,7 +836,7 @@ if userge.has_bot:
             if string == "":
                 results.append(REPO_X)
 
-            if string == "":
+            if string == "Repo":
                 results.append(D_X)
 
             if str_y[0] == "spoiler":
