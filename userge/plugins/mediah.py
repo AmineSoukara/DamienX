@@ -11,7 +11,7 @@ from userge.utils import time_formatter, humanbytes, mention_html
 TYPES = ['photo', 'video', 'video_note', 'document', 'animation', 'voice', 'audio', 'sticker']
 
 
-@userge.on_cmd("media_h", about={
+@userge.on_cmd("mh", about={
     'header': "media history",
     'usage': "reply {tr}media_h to any message"})
 async def media_h(message: Message):
