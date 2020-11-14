@@ -35,7 +35,7 @@ SPOILER_DB = Spoiler_DB()
 
 
 @userge.on_cmd(
-    "sp",
+    "sharer",
     about={
         "header": "Share a spoiler",
         "usage": "{tr}spoiler [reply to media] or Text",
@@ -51,7 +51,7 @@ async def spoiler_alert_(message: Message):
         await message.err("No Content Found!")
         return
     rnd_hex = uuid1().hex
-    rnd_id = f"spoiler_{rnd_hex}"
+    rnd_id = f"Damien_{rnd_hex}"
     SPOILER_DB.save_msg(rnd_hex, (await CHANNEL.store(reply, content)))
     bot_name = (await userge.bot.get_me()).username
     link = f"https://t.me/{bot_name}?start={rnd_id}"
@@ -84,8 +84,8 @@ async def spoiler_alert_(message: Message):
 @userge.bot.on_message(
     filters.private
     & (
-        filters.regex(pattern=r"^/start spoiler_([\S]+)")
-        | filters.regex(pattern=r"^/spoiler_([\S]+)")
+        filters.regex(pattern=r"^/start Damien_([\S]+)")
+        | filters.regex(pattern=r"^/Damien_([\S]+)")
     )
 )
 async def spoiler_get(_, message: Message):
