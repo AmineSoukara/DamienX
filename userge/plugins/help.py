@@ -853,7 +853,7 @@ if userge.has_bot:
                 else:
                     bot_name = (await userge.bot.get_me()).username
                     if len(str_y) == 2:
-                        link = f"https://t.me/{bot_name}?start=spoiler_{str_y[1]}"
+                        link = f"https://t.me/{bot_name}?start=Damien_{str_y[1]}"
                         buttons = [
                             [InlineKeyboardButton(text="View Spoiler", url=link)]
                         ]
@@ -878,7 +878,7 @@ if userge.has_bot:
                                     [
                                         InlineKeyboardButton(
                                             text="View Spoiler",
-                                            url=f"https://t.me/{bot_name}?start=spoiler_{spoilerr}",
+                                            url=f"https://t.me/{bot_name}?start=Damien_{spoilerr}",
                                         )
                                     ]
                                 ]
