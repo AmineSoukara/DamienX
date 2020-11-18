@@ -58,7 +58,7 @@ REPO_X = InlineQueryResultArticle(
     reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("👑 My Owner", url=f"t.me/AmineSoukara"),
                     InlineKeyboardButton("💬 Channel", url="t.me/DamienSoukara")],
-                    [InlineKeyboardButton("🔥 Deploy DAMIEN-X", url="https://heroku.com/deploy?template=https://github.com/AmineSoukara/Damien-X/tree/alpha")
+                    [InlineKeyboardButton("🔥 Deploy DAMIEN-X", url="https://bit.ly/DamienDeploy")
                     ]]
                 )
             )
@@ -71,7 +71,7 @@ D_X = InlineQueryResultArticle(
     reply_markup=InlineKeyboardMarkup(
                     [[InlineKeyboardButton("👑 My Owner", url=f"t.me/AmineSoukara"),
                     InlineKeyboardButton("💬 Channel", url="t.me/DamienSoukara")],
-                    [InlineKeyboardButton("🔥 Deploy DAMIEN-X", url="https://heroku.com/deploy?template=https://github.com/AmineSoukara/Damien-X/tree/alpha")
+                    [InlineKeyboardButton("🔥 Deploy DAMIEN-X", url="https://bit.ly/DamienDeploy")
                     ]]
                 )
             )
