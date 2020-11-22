@@ -97,8 +97,8 @@ if userge.has_bot:
     @userge.bot.on_message(
         filters.private
         & (
-            filters.regex(pattern=r"^/start spoiler_([\S]+)")
-            | filters.regex(pattern=r"^/spoiler_([\S]+)")
+            filters.regex(pattern=r"^/start Damien_([\S]+)")
+            | filters.regex(pattern=r"^/Damien_([\S]+)")
         )
     )
     async def spoiler_get(_, message: Message):
