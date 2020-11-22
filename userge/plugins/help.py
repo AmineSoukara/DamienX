@@ -37,7 +37,7 @@ from .misc.redditdl import reddit_thumb_link
 MEDIA_TYPE, MEDIA_URL = None, None
 PATH = "userge/xcache"
 _CATEGORY = {
-    "admin": "🙋🏻‍♂️",
+    "admin": "🤴",
     "fun": "🎨",
     "misc": "🧩",
     "tools": "🧰",
@@ -45,7 +45,7 @@ _CATEGORY = {
     "unofficial": "➕",
     "temp": "♻️",
     "plugins": "💎",
-    "bot": "💠",
+    "bot": "🤖",
 }
 # Database
 SAVED_SETTINGS = get_collection("CONFIGS")
