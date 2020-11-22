@@ -20,13 +20,13 @@ if userge.has_bot:
         if os.path.exists(SECRETS):
             view_data = json.load(open(SECRETS))
             sender = await userge.get_me()
-            msg = f"🔓 𝗠𝗲𝘀𝘀𝗮𝗴𝗲 𝗳𝗿𝗼𝗺: {sender.first_name}"
+            msg = f"🔓 MESSAGE FROM: {sender.first_name}"
             msg += f" {sender.last_name}\n" if sender.last_name else "\n"
             data = view_data[msg_id]
             receiver = data["user_id"]
             msg += data["msg"]
             u_id = c_q.from_user.id
-            if u_id in [Config.OWNER_ID, receiver]:
+            if u_id in Config.OWNER_ID or u_id == receiver:
                 await c_q.answer(msg, show_alert=True)
             else:
                 await c_q.answer("This Message is Confidential", show_alert=True)
