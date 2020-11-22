@@ -1,16 +1,22 @@
 # Copyright (C) 2020 BY - GitHub.com/code-rgb [TG - @deleteduser420]
 # All rights reserved.
 """Module that handles Bot PM"""
-import re
-from userge import userge, Message, Config, get_collection, logging
-from userge.utils import get_file_id_and_ref
-from pyrogram.types import (  
-     InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery )
-from pyrogram import filters
-from pyrogram.errors import FileIdInvalid, FileReferenceEmpty, BadRequest, ChannelInvalid, MediaEmpty
-from datetime import date
 import asyncio
+import re
+from datetime import date
 
+from pyrogram import filters
+from pyrogram.errors import (
+    BadRequest,
+    ChannelInvalid,
+    FileIdInvalid,
+    FileReferenceEmpty,
+    MediaEmpty,
+)
+from pyrogram.types import CallbackQuery, InlineKeyboardButton, InlineKeyboardMarkup
+
+from userge import Config, Message, get_collection, logging, userge
+from userge.utils import get_file_id_and_ref
 
 CHANNEL = userge.getCLogger(__name__)
 _LOG = logging.getLogger(__name__)
@@ -24,45 +30,56 @@ _DEFAULT = "https://t.me/DamienSoukara/4"
 
 
 if userge.has_bot:
-    @userge.bot.on_message((filters.private | filters.group) & filters.regex(pattern=r"^/start$"))
+
+    @userge.bot.on_message(filters.private & filters.regex(pattern=r"^/start$"))
     async def start_bot(_, message: Message):
         bot = await userge.bot.get_me()
         master = await userge.get_me()
         u_id = message.from_user.id
-        found = await BOT_BAN.find_one({'user_id': u_id})
+        found = await BOT_BAN.find_one({"user_id": u_id})
         if found:
             return
         f_name = message.from_user.first_name
         f_username = message.from_user.username
         u_n = master.username
         hello = f"""
-Hello **{f_name}**, 👋
-Nice To Meet You, Well I Am **{bot.first_name}**, A Bot.
-You Can Talk/Contact My **Owner** Using This Bot.
+Hello {f_name},
+Nice To Meet You! I'm **{bot.first_name}** A Bot.
+
+        <i><b>Powered by</i> [DAMIEN-X](https://t.me/DamienSoukara)</b>
+
+<b>My Master is: {master.first_name}</b>
+<i>You can contact my <b>Master</b> and checkout the <b>Repo</b> For more info.</i>
 """
-        if Config.BOT_FORWARDS:          
-            hello += "\n<b>✅</b> "
-            hello += "**ＢＯＴ ＦＯＲＷＡＲＤＩＮＧ ＩＳ** : 𝗢𝗡\n"
-            hello += "All Ur Messages Here Will Be Forwared To My **Owner**"
-        if u_id != Config.OWNER_ID:
-            found = await BOT_START.find_one({'user_id': u_id})
+        if Config.BOT_FORWARDS:
+            hello += "\n<b>NOTE: </b> "
+            hello += "**Bot Forwarding is** :  ☑️ `Enabled`\n"
+            hello += "All your messages here will be forwared to my **MASTER**"
+        if u_id not in Config.OWNER_ID:
+            found = await BOT_START.find_one({"user_id": u_id})
             if not found:
                 today = date.today()
                 d2 = today.strftime("%B %d, %Y")
-                start_date = d2.replace(',', '')
+                start_date = d2.replace(",", "")
                 u_n = master.username
-                BOT_START.insert_one({'firstname': f_name, 'user_id': u_id, 'date': start_date})
-                await asyncio.sleep(5)
-                log_msg = f"🆕️ A New User Started your Bot \n\n• <i>ID</i>: `{u_id}`\n   👤 : "
-                log_msg += f"@{f_username}" if f_username else f_name 
+                BOT_START.insert_one(
+                    {"firstname": f_name, "user_id": u_id, "date": start_date}
+                )
+                await asyncio.sleep(2)
+                log_msg = (
+                    f"🆕️ A New User Started your Bot \n\n• <i>ID</i>: `{u_id}`\n   👤 : "
+                )
+                log_msg += f"@{f_username}" if f_username else f_name
                 await CHANNEL.log(log_msg)
 
         if not (_CHAT and _MSG_ID):
             try:
                 _set_data()
             except Exception as set_err:
-                _LOG.exception("There was some problem while setting Media Data. "
-                                f"trying again... ERROR:: {set_err} ::")
+                _LOG.exception(
+                    "There was some problem while setting Media Data. "
+                    f"trying again... ERROR:: {set_err} ::"
+                )
                 _set_data(True)
         try:
             await _send_botstart(message, hello, u_n)
@@ -70,7 +87,6 @@ You Can Talk/Contact My **Owner** Using This Bot.
             await _refresh_id(message)
             await _send_botstart(message, hello, u_n)
 
- 
     async def _refresh_id(message: Message) -> None:
         global LOGO_ID, LOGO_REF  # pylint: disable=global-statement
         try:
@@ -79,7 +95,6 @@ You Can Talk/Contact My **Owner** Using This Bot.
             _set_data(True)
             return await _refresh_id(message)
         LOGO_ID, LOGO_REF = get_file_id_and_ref(media)
-
 
     def _set_data(errored: bool = False) -> None:
         global _CHAT, _MSG_ID, _DEFAULT  # pylint: disable=global-statement
@@ -101,18 +116,16 @@ You Can Talk/Contact My **Owner** Using This Bot.
             match = re.search(pattern, _DEFAULT)
             _CHAT = match.group(6)
             _MSG_ID = int(match.group(7))
-    
 
-    async def _send_botstart(message: Message,
-                            caption_text: str,
-                            u_n: str,
-                            recurs_count: int = 0) -> None:
+    async def _send_botstart(
+        message: Message, caption_text: str, u_n: str, recurs_count: int = 0
+    ) -> None:
         if not (LOGO_ID and LOGO_REF):
             await _refresh_id(message)
         try:
             await userge.bot.send_cached_media(
                 chat_id=message.chat.id,
-                file_id=LOGO_ID, 
+                file_id=LOGO_ID,
                 file_ref=LOGO_REF,
                 caption=caption_text,
                 reply_markup=InlineKeyboardMarkup(
@@ -128,11 +141,10 @@ You Can Talk/Contact My **Owner** Using This Bot.
             await _refresh_id(message)
             return await _send_botstart(message, caption_text, u_n, recurs_count + 1)
 
-
     @userge.bot.on_callback_query(filters.regex(pattern=r"^add_to_grp$"))
-    async def add_to_grp(_, callback_query: CallbackQuery): 
-        u_id = callback_query.from_user.id 
-        if u_id == Config.OWNER_ID:
+    async def add_to_grp(_, callback_query: CallbackQuery):
+        u_id = callback_query.from_user.id
+        if u_id in Config.OWNER_ID:
             botname = (await userge.bot.get_me()).username
             msg = "**✅ Login Successfully :** \n\n <u>Note:</u>  <i>👑 Admin Privilege Required !</i>\n\n<b>⚙ Available Commands :</b> \n\n● /bot_fwd - Enable / Disable Bot Forwards, (Works Only In Bot Pm) \n● /ban - Ban A User From Bot PM [user_id/user_name] Reason Or [Reply To Forwarded Message With Reason] \n● /broadcast - Send A Broadcast Message To Users In Your StartList (Can Work Outside Bot PM)  [Reply To A Message] \n● /unbban -  Unban Users That Are In BotBanList [user_id/user_name] Check bblist For Banned Users. \n● /bblist - Users Banned From Your Bot's PM \n● /users - Get A List Active Users Who Started Your Bot"
             add_bot = f"http://t.me/{botname}?startgroup=start"
