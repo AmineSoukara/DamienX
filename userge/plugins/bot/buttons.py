@@ -7,13 +7,10 @@ import os
 import re
 
 from html_telegraph_poster.upload_images import upload_image
-from pyrogram.errors.exceptions.bad_request_400 import (
-    BadRequest,
-    MessageEmpty,
-    UserIsBot,
-)
+from pyrogram.errors import BadRequest, MessageEmpty, UserIsBot
 
 from userge import Config, Message, get_collection, userge
+from userge.utils import get_file_id_and_ref
 from userge.utils import parse_buttons as pb
 
 BUTTON_BASE = get_collection("TEMP_BUTTON")
@@ -130,3 +127,57 @@ async def down_image(message):
         message=message.reply_to_message, file_name=Config.DOWN_PATH
     )
     return os.path.join(Config.DOWN_PATH, os.path.basename(dls))
+
+
+@userge.on_cmd(
+    "noformat",
+    about={
+        "header": "decompile a message",
+        "description": "reply to a message to get it without any text formatting",
+        "flags": {"-alt": "for MissRose bot supported format"},
+    },
+)
+async def noformat_message(message: Message):
+    reply = message.reply_to_message
+    msg_text = None
+    buttons = ""
+    medias = get_file_id_and_ref(reply)
+    if reply.text:
+        msg_text = reply.text.html
+    elif medias[0]:
+        msg_text = reply.caption.html if reply.caption else None
+    else:
+        return await message.err(
+            "Not Supported!, reply to a supported media type or text", del_in=5
+        )
+
+    if "-alt" in message.flags:
+        lbr_ = "("
+        rbr_ = ")"
+    else:
+        lbr_ = "["
+        rbr_ = "]"
+
+    if reply.reply_markup:
+        for row in reply.reply_markup.inline_keyboard:
+            firstbtn = True
+            for btn in row:
+                if btn.url:
+                    if firstbtn:
+                        buttons += f"[{btn.text}]{lbr_}buttonurl:{btn.url}{rbr_}"
+                        firstbtn = False
+                    else:
+                        buttons += f"[{btn.text}]{lbr_}buttonurl:{btn.url}:same{rbr_}"
+
+    if medias[0]:
+        await message.delete()
+        await message.client.send_cached_media(
+            chat_id=message.chat.id,
+            file_id=medias[0],
+            file_ref=medias[1],
+            caption=f"{msg_text}{buttons}",
+            reply_to_message_id=reply.message_id,
+            parse_mode=None,
+        )
+    else:
+        await message.edit(f"{msg_text}{buttons}", parse_mode=None)
