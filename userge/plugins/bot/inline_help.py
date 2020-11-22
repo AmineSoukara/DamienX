@@ -52,9 +52,9 @@ COMMANDS = {
         "help_txt": f"**Download Youtube Videos with Buttons**\n\nTo Download video from youtube with desired quality.\n>>>  `ytdl [link]` or `{Config.CMD_TRIGGER}iytdl`",
         "i_q": "ytdl https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     },
-    "spoiler": {
+    "Spoiler": {
         "help_txt": "**Send Saved Spoiler Via Inline**\n For more info see `.help spoiler`\n\n>>>  `spoiler [ID]`",
-        "i_q": "spoiler",
+        "i_q": "Damien",
     },
 }
 
