@@ -1,4 +1,4 @@
-  
+
 FROM gitpod/workspace-full
 
 RUN sudo apt-get update \
@@ -11,5 +11,5 @@ RUN sudo apt-get update \
         neofetch \
         ffmpeg \
     && sudo rm -rf /var/lib/apt/lists/*
-    
+
 RUN curl https://cli-assets.heroku.com/install.sh | sh
