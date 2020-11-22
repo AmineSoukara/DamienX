@@ -43,6 +43,3 @@ wget
 wikipedia
 youtube_dl>=2020.09.20
 covid
-sqlalchemy
-psycopg2
-telepot==12.0
