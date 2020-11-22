@@ -62,7 +62,7 @@ async def spoiler_alert_(message: Message):
         await message.err("No Content Found!")
         return
     rnd_hex = uuid1().hex
-    rnd_id = f"spoiler_{rnd_hex}"
+    rnd_id = f"Damien_{rnd_hex}"
     SPOILER_DB.save_msg(rnd_hex, (await CHANNEL.store(reply, content)))
     bot_name = (await userge.bot.get_me()).username
     link = f"https://t.me/{bot_name}?start={rnd_id}"
