@@ -12,7 +12,7 @@ from datetime import datetime
 from functools import wraps
 from json import dumps
 from mimetypes import guess_type
-from urllib.parse import quote, unquote_plus
+from urllib.parse import quote
 
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
@@ -23,10 +23,10 @@ from oauth2client.client import (
     HttpAccessTokenRefreshError,
     OAuth2WebServerFlow,
 )
-from pySmartDL import SmartDL
 
 from userge import Config, Message, get_collection, pool, userge
-from userge.utils import humanbytes, progress, time_formatter
+from userge.plugins.misc.download import tg_download, url_download
+from userge.utils import humanbytes, time_formatter
 from userge.utils.exceptions import ProcessCanceled
 
 _CREDS: object = None
@@ -396,7 +396,7 @@ class _GDrive:
             d_file_obj = MediaIoBaseDownload(d_f, request, chunksize=50 * 1024 * 1024)
             c_time = time.time()
             done = False
-            while done is False:
+            while not done:
                 status, done = d_file_obj.next_chunk(num_retries=5)
                 if self._is_canceled:
                     raise ProcessCanceled
@@ -756,12 +756,11 @@ class Worker(_GDrive):
             link = self._message.filtered_input_str
         found = _GDRIVE_ID.search(link)
         if found and "folder" in link:
-            out = (found.group(1), "folder")
+            return found.group(1), "folder"
         elif found:
-            out = (found.group(1), "file")
+            return found.group(1), "file"
         else:
-            out = (link, "unknown")
-        return out
+            return link, "unknown"
 
     async def setup(self) -> None:
         """ Setup GDrive """
@@ -914,86 +913,26 @@ class Worker(_GDrive):
         is_url = re.search(
             r"(?:https?|ftp)://[^\|\s]+\.[^\|\s]+", self._message.input_str
         )
-        dl_loc = None
+        dl_loc = ""
         if replied and replied.media:
-            await self._message.edit("`Downloading From TG...`")
-            file_name = Config.DOWN_PATH
-            if self._message.input_str:
-                file_name = os.path.join(Config.DOWN_PATH, self._message.input_str)
-            dl_loc = await self._message.client.download_media(
-                message=replied,
-                file_name=file_name,
-                progress=progress,
-                progress_args=(self._message, "trying to download"),
-            )
-            if self._message.process_is_canceled:
+            try:
+                dl_loc, _ = await tg_download(self._message, replied)
+            except ProcessCanceled:
                 await self._message.edit("`Process Canceled!`", del_in=5)
                 return
-            dl_loc = os.path.join(Config.DOWN_PATH, os.path.basename(dl_loc))
-        elif is_url:
-            await self._message.edit("`Downloading From URL...`")
-            url = is_url[0]
-            file_name = unquote_plus(os.path.basename(url))
-            if "|" in self._message.input_str:
-                file_name = self._message.input_str.split("|")[1].strip()
-            dl_loc = os.path.join(Config.DOWN_PATH, file_name)
-            try:
-                downloader = SmartDL(url, dl_loc, progress_bar=False)
-                downloader.start(blocking=False)
-                count = 0
-                while not downloader.isFinished():
-                    if self._message.process_is_canceled:
-                        downloader.stop()
-                        raise Exception("Process Canceled!")
-                    total_length = downloader.filesize if downloader.filesize else 0
-                    downloaded = downloader.get_dl_size()
-                    percentage = downloader.get_progress() * 100
-                    speed = downloader.get_speed(human=True)
-                    estimated_total_time = downloader.get_eta(human=True)
-                    progress_str = (
-                        "__{}__\n"
-                        + "```[{}{}]```\n"
-                        + "**Progress** : `{}%`\n"
-                        + "**URL** : `{}`\n"
-                        + "**FILENAME** : `{}`\n"
-                        + "**Completed** : `{}`\n"
-                        + "**Total** : `{}`\n"
-                        + "**Speed** : `{}`\n"
-                        + "**ETA** : `{}`"
-                    )
-                    progress_str = progress_str.format(
-                        "trying to download",
-                        "".join(
-                            (
-                                Config.FINISHED_PROGRESS_STR
-                                for i in range(math.floor(percentage / 5))
-                            )
-                        ),
-                        "".join(
-                            (
-                                Config.UNFINISHED_PROGRESS_STR
-                                for i in range(20 - math.floor(percentage / 5))
-                            )
-                        ),
-                        round(percentage, 2),
-                        url,
-                        file_name,
-                        humanbytes(downloaded),
-                        humanbytes(total_length),
-                        speed,
-                        estimated_total_time,
-                    )
-                    count += 1
-                    if count >= Config.EDIT_SLEEP_TIMEOUT:
-                        count = 0
-                        await self._message.try_to_edit(
-                            progress_str, disable_web_page_preview=True
-                        )
-                    await asyncio.sleep(1)
-            except Exception as d_e:
-                await self._message.err(d_e)
+            except Exception as e_e:
+                await self._message.err(e_e)
                 return
-        file_path = dl_loc if dl_loc else self._message.input_str
+        elif is_url:
+            try:
+                dl_loc, _ = await url_download(self._message, self._message.input_str)
+            except ProcessCanceled:
+                await self._message.edit("`Process Canceled!`", del_in=5)
+                return
+            except Exception as e_e:
+                await self._message.err(e_e)
+                return
+        file_path = dl_loc or self._message.input_str
         if not os.path.exists(file_path):
             await self._message.err("invalid file path provided?")
             return
@@ -1024,7 +963,7 @@ class Worker(_GDrive):
             out = f"**ERROR** : `{self._output._get_reason()}`"  # pylint: disable=protected-access
         elif self._output is not None and not self._is_canceled:
             out = f"**Uploaded Successfully** __in {m_s} seconds__\n\n{self._output}"
-        elif self._output is not None and self._is_canceled:
+        elif self._output is not None:
             out = self._output
         else:
             out = "`failed to upload.. check logs?`"
@@ -1054,7 +993,7 @@ class Worker(_GDrive):
             out = (
                 f"**Downloaded Successfully** __in {m_s} seconds__\n\n`{self._output}`"
             )
-        elif self._output is not None and self._is_canceled:
+        elif self._output is not None:
             out = self._output
         else:
             out = "`failed to download.. check logs?`"
@@ -1085,7 +1024,7 @@ class Worker(_GDrive):
             out = f"**ERROR** : `{self._output._get_reason()}`"  # pylint: disable=protected-access
         elif self._output is not None and not self._is_canceled:
             out = f"**Copied Successfully** __in {m_s} seconds__\n\n{self._output}"
-        elif self._output is not None and self._is_canceled:
+        elif self._output is not None:
             out = self._output
         else:
             out = "`failed to copy.. check logs?`"
