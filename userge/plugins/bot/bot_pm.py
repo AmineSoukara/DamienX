@@ -190,7 +190,6 @@ My Master Is : {owner_.flname}</b>
             if Config.BOT_FORWARDS:
                 start_msg += "<b>\n📌 NOTE:</b>\nYou Can 📨 <b>Send Message</b> Here To Contact My <b>Master.</b>"
             contact_url = "https://bio.link/aminesoukara"
-            )
             btns = [
                 [
                     InlineKeyboardButton("👤 OWNER", url=contact_url),
