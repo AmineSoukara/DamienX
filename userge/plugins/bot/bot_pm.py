@@ -189,14 +189,11 @@ My Master Is : {owner_.flname}</b>
 """
             if Config.BOT_FORWARDS:
                 start_msg += "<b>\n📌 NOTE:</b>\nYou Can 📨 <b>Send Message</b> Here To Contact My <b>Master.</b>"
-            contact_url = (
-                f"https://t.me/{owner_.uname}"
-                if owner_.uname
-                else f"tg://user?id={owner_.id}"
+            contact_url = "https://bio.link/aminesoukara"
             )
             btns = [
                 [
-                    InlineKeyboardButton("👤  CONTACT", url=contact_url),
+                    InlineKeyboardButton("👤 OWNER", url=contact_url),
                     InlineKeyboardButton("⭐️  CHANNEL", url="t.me/DamienSoukara"),
                 ]
             ]
