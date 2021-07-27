@@ -118,7 +118,7 @@ class Config:
     TG_IDS = [777000, 1087968824, 454000]
     INLINE_NOTES = False
     BOT_ANTIFLOOD = False
-
+    PmImg = os.environ.get("PmImg", "CgACAgQAAxkDAAEEDnVhAAFUedhaRofWwd_fNXZelbW24T4AAvAJAAId5_FT82fDgT4-aO8eBA)
 
 def get_version() -> str:
     """get USERGE-X version"""
