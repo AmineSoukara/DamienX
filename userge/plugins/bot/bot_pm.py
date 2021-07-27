@@ -197,13 +197,8 @@ My Master Is : {owner_.flname}</b>
                 ]
             ]
         try:
-            # await send_bot_media(message, start_msg,
-            # InlineKeyboardMarkup(btns))
-            await message.reply_cached_media(
-                file_id=Config.PmImg,
-                caption=start_msg,
-                reply_markup=InlineKeyboardMarkup(btns),
-            )
+            await send_bot_media(message, start_msg, InlineKeyboardMarkup(btns))
+
         except FloodWait as e:
             await asyncio.sleep(e.x + 10)
         except Exception as bpm_e:
