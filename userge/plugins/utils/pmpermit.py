@@ -296,7 +296,7 @@ async def uninvitedPmHandler(message: Message):
             await message.reply_cached_media(
                 file_id=Config.PmImg,
                 caption=noPmMessage.format_map(SafeDict(**user_dict))
-                + "\n● Protected By : @AmineSoukara"
+                + "\n● Protected By : @AmineSoukara",
             )
         ).message_id
         await asyncio.sleep(1)
