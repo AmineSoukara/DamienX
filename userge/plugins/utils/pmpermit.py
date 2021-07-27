@@ -293,8 +293,9 @@ async def uninvitedPmHandler(message: Message):
     else:
         pmCounter.update({message.from_user.id: 1})
         PMPERMIT_MSG[message.from_user.id] = (
-            await message.reply(
-                noPmMessage.format_map(SafeDict(**user_dict))
+            await message.reply_cached_media(
+                file_id=Config.PmImg,
+                caption=noPmMessage.format_map(SafeDict(**user_dict))
                 + "\n● Protected By : @AmineSoukara"
             )
         ).message_id
