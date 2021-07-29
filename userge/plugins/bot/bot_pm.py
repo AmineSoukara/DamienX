@@ -76,7 +76,7 @@ if userge.has_bot:
         global _BOT_PM_MEDIA
         if not Config.BOT_MEDIA:
             _BOT_PM_MEDIA = get_file_id(
-                await userge.bot.get_messages(int(-1001310935858), 11)
+                await userge.bot.get_messages("damiensoukara", 4)
             )
             return
         if Config.BOT_MEDIA.strip().lower() != "false":
